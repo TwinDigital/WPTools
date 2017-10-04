@@ -5,7 +5,12 @@
   "minimum-stability": "stable",
   "license": "MIT",
   "type": "library",
-  "keywords": "libray, tools, utilities",
+  "keywords": [
+    "library",
+    "tools",
+    "utilities",
+    "wordpress"
+  ],
   "authors": [
     {
       "name": "Lucien Plattel",
