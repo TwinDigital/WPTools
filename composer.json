@@ -1,0 +1,26 @@
+{
+  "name": "twindigital/wptools",
+  "version": "1.0.0",
+  "description": "Collection of tools to work with WP on a higher level",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "type": "library",
+  "keywords": "libray, tools, utilities",
+  "authors": [
+    {
+      "name": "Lucien Plattel",
+      "email": "lucienplattel@twindigital.nl"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "TwinDigital\\WPTools\\": "src/WPTools"
+    }
+  },
+  "scripts": {
+  }
+}

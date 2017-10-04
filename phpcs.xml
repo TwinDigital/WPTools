@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<ruleset name="TwinDigital" namespace="TwinDigital">
+  <description>The coding standard for Twin Digital.</description>
+  <file>autoload.php</file>
+  <file>bin</file>
+  <file>src</file>
+  <file>tests</file>
+
+  <arg name="basepath" value="."/>
+  <arg name="colors"/>
+  <arg name="parallel" value="75"/>
+  <arg value="np"/>
+  <description>PSR2 with tabs instead of spaces.</description>
+  <arg name="tab-width" value="2"/>
+
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+      <property name="tabIndent" value="false"/>
+    </properties>
+  </rule>
+
+  <rule ref="Generic.Files.LineEndings">
+    <properties>
+      <property name="eolChar" value="\n"/>
+    </properties>
+  </rule>
+  <rule ref="Generic.Metrics.CyclomaticComplexity.MaxExceeded">
+    <severity>8</severity>
+  </rule>
+  <rule ref="Generic.Metrics.CyclomaticComplexity">
+    <properties>
+      <property name="absoluteComplexity" value="30"/>
+    </properties>
+  </rule>
+  <rule ref="Generic.Metrics.CyclomaticComplexity.TooHigh">
+    <severity>7</severity>
+  </rule>
+  <rule ref="Generic.Metrics.CyclomaticComplexity">
+    <properties>
+      <property name="complexity" value="10"/>
+    </properties>
+  </rule>
+  <rule ref="Generic.PHP.ForbiddenFunctions">
+    <properties>
+      <property name="forbiddenFunctions" type="array" value="delete=>unset,print=>echo,create_function=>null"/>
+    </properties>
+  </rule>
+  <rule ref="Generic.Commenting.Todo.CommentFound">
+    <message>Please review this TODO comment: %s</message>
+    <severity>3</severity>
+  </rule>
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+      <property name="tabIndent" value="false"/>
+    </properties>
+  </rule>
+  <rule ref="Generic">
+    <exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+    <exclude name="Generic.Commenting.DocComment.SpacingBeforeTags"/>
+    <exclude name="Generic.Commenting.DocComment.TagValueIndent"/>
+    <exclude name="Generic.Files.LowercasedFilename.NotFound"/>
+    <exclude name="Generic.Files.EndFileNoNewline.Found"/>
+    <exclude name="Generic.Files.InlineHTML.Found"/>
+    <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
+    <exclude name="Generic.Formatting.SpaceAfterCast.NoSpace"/>
+    <exclude name="Generic.Formatting.SpaceAfterNot.Incorrect"/>
+    <exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+    <exclude name="Generic.PHP.UpperCaseConstant.Found"/>
+    <exclude name="Generic.PHP.ClosingPHPTag.NotFound"/>
+    <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+  </rule>
+
+  <rule ref="PSR2">
+    <exclude name="PSR2.Methods.FunctionCallSignature.Indent"/>
+    <exclude name="PSR2.Methods.FunctionCallSignature.MultipleArguments"/>
+    <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+    <exclude name="PSR2.ControlStructures.SwitchDeclaration.BreakIndent"/>
+    <exclude name="PEAR.Functions.FunctionCallSignature.Indent"/>
+    <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments"/>
+  </rule>
+  <rule ref="Squiz">
+    <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+    <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
+    <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
+    <exclude name="Squiz.Classes.ClassDeclaration.OpenBraceNewLine"/>
+    <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+    <exclude name="Squiz.Commenting.FileComment.Missing"/>
+    <exclude name="Squiz.Commenting.FileComment.IncorrectAuthor"/>
+    <exclude name="Squiz.Commenting.FileComment.IncorrectCopyright"/>
+    <exclude name="Squiz.Commenting.InlineComment"/>
+    <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing"/>
+    <exclude name="Squiz.ControlStructures.SwitchDeclaration.CaseIndent"/>
+    <exclude name="Squiz.ControlStructures.SwitchDeclaration.DefaultIndent"/>
+    <exclude name="Squiz.Files.FileExtension.ClassFound"/>
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+    <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.Indent"/>
+    <exclude name="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps"/>
+    <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
+    <exclude name="Squiz.PHP.DisallowInlineIf.Found"/>
+    <exclude name="Squiz.PHP.DisallowComparisonAssignment.AssignedComparison"/>
+    <exclude name="Squiz.PHP.DisallowMultipleAssignments.Found"/>
+    <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound"/>
+    <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+    <exclude name="Squiz.Objects.ObjectInstantiation.NotAssigned"/>
+    <exclude name="Squiz.WhiteSpace.FunctionSpacing.Before"/>
+    <exclude name="Squiz.WhiteSpace.FunctionSpacing.After"/>
+    <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose"/>
+  </rule>
+</ruleset>
