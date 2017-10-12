@@ -33,7 +33,7 @@ class PluginTools {
     }
     if (empty(self::$_loadedPlugins) === true) {
       if (function_exists('get_plugins') === false) {
-        include_once ABSPATH . '/wp-admin/includes/plugin.php';
+        include_once \ABSPATH . '/wp-admin/includes/plugin.php';
       }
       $all_plugins = get_plugins();
       $active_plugins = (array)get_option('active_plugins', []);
