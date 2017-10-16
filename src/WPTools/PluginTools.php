@@ -32,9 +32,7 @@ class PluginTools {
       self::$_loadedPlugins = [];
     }
     if (empty(self::$_loadedPlugins) === true) {
-      if (function_exists('get_plugins') === false) {
-        include_once \ABSPATH . '/wp-admin/includes/plugin.php';
-      }
+      include_once \ABSPATH . '/wp-admin/includes/plugin.php';
       $all_plugins = get_plugins();
       $active_plugins = (array)get_option('active_plugins', []);
       foreach ($all_plugins as $k => $plugin) {
@@ -70,9 +68,7 @@ class PluginTools {
    * @return array|boolean False if not found, array otherwise.
    */
   public static function getPluginByTitle(string $title, bool $case_sensitive = true) {
-    if (empty(self::$_loadedPlugins) === true) {
-      self::_initLoadedPlugins();
-    }
+    self::_initLoadedPlugins();
     foreach (self::$_loadedPlugins as $k => $v) {
       if ($case_sensitive === true) {
         $v['Name'] = strtolower($v['Name']);
