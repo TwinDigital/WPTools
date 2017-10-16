@@ -74,7 +74,7 @@ class PluginTools {
         $v['Name'] = strtolower($v['Name']);
         $title = strtolower($title);
       }
-      if (isset($v['Name']) === true && $v['Name'] === $title) {
+      if ($v['Name'] === $title) {
         return $v;
       }
     }
