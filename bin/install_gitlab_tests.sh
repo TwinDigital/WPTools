@@ -83,7 +83,7 @@ install_gitlab_test_runner() {
 	# [[ ! -e /.dockerinit ]] && exit 0
 	set -xe
 	apt-get clean
-	# apt-get -yqq update
+	apt-get -yqq update
 	# instll the required packages for the running CI tests
 	apt-get -yqqf install zip unzip subversion mysql-client libmysqlclient-dev --fix-missing
 	# PHP extensions
