@@ -6,7 +6,7 @@ if ($_tests_dir === false) {
 }
 
 define('PLUGIN_FILE', getenv('PLUGIN_FILE'));
-define('PLUGIN_FOLDER', basename(dirname(__DIR__)));
+define('PLUGIN_FOLDER', basename(__DIR__ . '/../'));
 define('PLUGIN_PATH', PLUGIN_FOLDER . '/' . PLUGIN_FILE);
 
 require_once PLUGIN_FOLDER . '/vendor/autoload.php';
