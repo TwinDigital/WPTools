@@ -1,4 +1,4 @@
-sudo: enabled
+sudo: false
 language: php
 
 cache:
@@ -21,11 +21,14 @@ env:
   - WP_VERSION=4.7 WP_MULTISITE=0
 
 before_script:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - composer global require "phpunit/phpunit=5.7.*"
+  - composer require satooshi/php-coveralls '~1.0'
 
 script:
-  - sudo composer install --no-interaction
-  - sudo phpunit --configuration phpunit.xml.dist --coverage-clover=build/logs/clover.xml
+  - composer install --no-interaction
+  - phpunit --configuration phpunit.xml.dist --coverage-clover=build/logs/clover.xml
 
 after_success:
   - travis_retry php vendor/bin/coveralls --verbose --exclude-no-stmt
