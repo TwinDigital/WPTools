@@ -24,15 +24,22 @@ before_script:
 #  script:
 #  - phpunit --configuration phpunit.xml.dist
 #
-PHPunit:PHP5.6:MySQL:
-  image: tetraweb/php:5.6
+#PHPunit:PHP5.6:MySQL:
+#  image: tetraweb/php:5.6
+#  services:
+#    - mysql:5.6
+#  script:
+#  - phpunit --configuration phpunit.xml.dist
+
+PHPunit:PHP7.0:MySQL:
+  image: tetraweb/php:7.0
   services:
     - mysql:5.6
   script:
   - phpunit --configuration phpunit.xml.dist
 
-PHPunit:PHP7.0:MySQL:
-  image: tetraweb/php:7.0
+PHPunit:PHP7.1:MySQL:
+  image: tetraweb/php:7.1
   services:
     - mysql:5.6
   script:
