@@ -6,10 +6,17 @@ if ($_tests_dir === false) {
 }
 
 define('PLUGIN_FILE', getenv('PLUGIN_FILE'));
-define('PLUGIN_FOLDER', __DIR__.'/../');
+define('PLUGIN_FOLDER', __DIR__ . '/../');
 define('PLUGIN_PATH', PLUGIN_FOLDER . '/' . PLUGIN_FILE);
 
-require_once PLUGIN_FOLDER . '/vendor/autoload.php';
+if (!@include PLUGIN_FOLDER . '/vendor/autoload.php') {
+  if (!@include __DIR__ . '/../vendor/autoload.php') {
+    die('You must set up the project dependencies, run the following commands:
+        wget http://getcomposer.org/composer.phar
+        php composer.phar install');
+  }
+}
+
 $GLOBALS['wp_tests_options'] = [
   'active_plugins' => [PLUGIN_PATH],
   'template'       => 'twentysixteen',
