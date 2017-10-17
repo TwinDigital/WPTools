@@ -1,0 +1,13 @@
+sudo: disabled
+language: php
+php:
+  - 7.1
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=4.7 WP_MULTISITE=0
+before_script:
+  - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
+  - composer install
+script:
+  - composer install --no-interaction
+  - phpunit --configuration phpunit.xml.dist
