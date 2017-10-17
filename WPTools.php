@@ -13,5 +13,8 @@
  * Version: 0.5.0-RC2
  * Author URI: https://twindigital.nl/
  */
+
+use TwinDigital\WPTools\PluginTools;
+
 require __DIR__ . '/vendor/autoload.php';
-add_action('plugins_loaded', \TwinDigital\WPTools\PluginTools::loadPluginList());
+add_action('plugins_loaded', PluginTools::loadPluginList());

@@ -13,10 +13,10 @@ class PluginTools {
   /**
    * Keeps track of the loaded plugins
    *
-   * @var array $_loadedPlugins
+   * @var array $loadedPlugins
    * @since 1.0.0
    */
-  private static $_loadedPlugins = [];
+  public static $loadedPlugins = [];
 
   /**
    * Loads the list of plugins.
@@ -26,17 +26,17 @@ class PluginTools {
    * @since 1.0.0
    * @return void
    */
-  private static function _initLoadedPlugins(bool $force_reload = false): void {
+  public static function loadPluginList(bool $force_reload = false): void {
     if ($force_reload === true) {
       wp_cache_flush();
-      self::$_loadedPlugins = [];
+      self::$loadedPlugins = [];
     }
-    if (empty(self::$_loadedPlugins) === true) {
+    if (empty(self::$loadedPlugins) === true) {
       include_once \ABSPATH . '/wp-admin/includes/plugin.php';
       $all_plugins = get_plugins();
       $active_plugins = (array)get_option('active_plugins', []);
       foreach ($all_plugins as $k => $plugin) {
-        self::$_loadedPlugins[] = array_merge(
+        self::$loadedPlugins[] = array_merge(
           $plugin,
           [
             'Path'   => $k,
@@ -50,12 +50,12 @@ class PluginTools {
   /**
    * Refreshes the loaded plugins.
    *
-   * @see   \TwinDigital\WPTools\PluginTools::_initLoadedPlugins()
+   * @see   \TwinDigital\WPTools\PluginTools::loadPluginList()
    * @since 1.0.0
    * @return void
    */
   public static function refreshLoadedPlugins(): void {
-    self::_initLoadedPlugins(true);
+    self::loadPluginList(true);
   }
 
   /**
@@ -68,8 +68,8 @@ class PluginTools {
    * @return array|boolean False if not found, array otherwise.
    */
   public static function getPluginByTitle(string $title, bool $case_sensitive = true) {
-    self::_initLoadedPlugins();
-    foreach (self::$_loadedPlugins as $k => $v) {
+    self::loadPluginList();
+    foreach (self::$loadedPlugins as $k => $v) {
       if ($case_sensitive === true) {
         $v['Name'] = strtolower($v['Name']);
         $title = strtolower($title);
