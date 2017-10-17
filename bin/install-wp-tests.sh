@@ -105,20 +105,7 @@ install_db() {
 	mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
 }
 
-# Install JSCS: JavaScript Code Style checker
-# @link http://jscs.info/
-install_jscs() {
-	npm install -g jscs@3.0.4
-}
-
-# Install JSHint, a JavaScript Code Quality Tool
-# @link http://jshint.com/docs/
-install_jshint() {
-	npm install -g jshint
-}
 
 install_wp
 install_test_suite
 install_db
-install_jscs
-install_jshint
