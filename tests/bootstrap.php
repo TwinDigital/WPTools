@@ -29,7 +29,7 @@ tests_add_filter(
   'muplugins_loaded',
   function () {
     // Manually load plugin
-    include __DIR__ . '/../WPTools.php';
+    include PLUGIN_PATH;
   }
 );
 
