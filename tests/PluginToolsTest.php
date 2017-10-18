@@ -50,6 +50,17 @@ class PluginToolsTest extends WP_UnitTestCase {
     print_r(PluginTools::$loadedPlugins);
     echo 'End of lugin-list:' . PHP_EOL;
     $this->assertEmpty(PluginTools::getPluginByTitle('Non-existing-plugin'), 'Found a plugin that is non-existing? Oops');
-    $this->assertNotEmpty(PluginTools::getPluginByTitle('WPTools'), 'Current plugin is not active?');
+    $list_of_plugins_to_try = [
+      'Akismet Anti-Spam',
+      'Hello Dolly',
+    ];
+    $plugin_details = null;
+    foreach ($list_of_plugins_to_try as $plugin) {
+      $plugin_details = PluginTools::getPluginByTitle('Akismet Anti-Spam');
+      if ($plugin_details !== false) {
+        break;
+      }
+    }
+    $this->assertNotEmpty($plugin_details, 'Current plugin is not active?');
   }
 }
