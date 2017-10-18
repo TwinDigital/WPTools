@@ -5,6 +5,8 @@ variables:
 
 before_script:
   # Install dependencies
+  - pecl install xdebug
+  - docker-php-ext-enable xdebug
   - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
   # - composer install --no-interaction
   # - composer --version
