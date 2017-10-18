@@ -5,8 +5,11 @@ variables:
 
 before_script:
   # Install dependencies
+  - apt-get clean
+  - apt-get -y update
+  - apt-get -yf install zip unzip subversion mysql-client libmysqlclient-dev --fix-missing
   - pecl install xdebug
-  - docker-php-ext-enable xdebug
+  - docker-php-ext-enable xdebug mcrypt mysqli pdo_mysql intl gd
   - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
   # - composer install --no-interaction
   # - composer --version

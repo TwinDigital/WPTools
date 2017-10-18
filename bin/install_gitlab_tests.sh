@@ -71,17 +71,5 @@ install_test_suite() {
 	fi
 	cat wp-tests-config.php
 }
-install_gitlab_test_runner() {
-	# We need to install dependencies only for Docker
-	# [[ ! -e /.dockerinit ]] && exit 0
-	set -xe
-	apt-get clean
-	apt-get -y update
-	# instll the required packages for the running CI tests
-	apt-get -yf install zip unzip subversion mysql-client libmysqlclient-dev --fix-missing
-	# PHP extensions
-	docker-php-ext-enable mcrypt mysqli pdo_mysql intl gd
-}
-install_gitlab_test_runner
 install_wp
 install_test_suite
