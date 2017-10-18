@@ -25,6 +25,7 @@ class PluginToolsTest extends WP_UnitTestCase {
    */
   public function testLoadPluginList() {
     PluginTools::$loadedPlugins = [];
+    PluginTools::loadPluginList();
     $this->assertNotCount(0, PluginTools::$loadedPlugins, 'Pluginlist is empty, probably failed loading the list of plugins.');
   }
 
