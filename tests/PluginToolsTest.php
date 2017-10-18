@@ -18,7 +18,7 @@ class PluginToolsTest extends TestCase {
   /**
    * Tests if the plugin_list is loaded.
    *
-   * @covers PluginTools::loadPluginList()
+   * @covers \TwinDigital\WPTools\PluginTools::loadPluginList()
    * @return void
    */
   public function testLoadPluginListForced() {
@@ -29,7 +29,7 @@ class PluginToolsTest extends TestCase {
   /**
    * Tests if the plugin_list is loaded.
    *
-   * @covers PluginTools::refreshLoadedPlugins()
+   * @covers \TwinDigital\WPTools\PluginTools::refreshLoadedPlugins()
    * @return void
    */
   public function testRefreshLoadedPlugins() {
