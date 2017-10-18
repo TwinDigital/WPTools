@@ -46,19 +46,11 @@ PHPunit:PHP7.1:MySQL:
     - mysql:5.6
   script:
   - composer install --no-interaction --no-progress
-  - phpunit --configuration phpunit.xml.dist --coverage-text --colors=never
-
-unitTesting:
-    script:
-        - echo "Running PHP Unit tet"
-        - php vendor/bin/phpunit --colors --debug  --coverage-text
-codeSniffer:
-    script:
-        - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
-        - php vendor/bin/phpcs --standard=phpcs.xml -w --colors src/
-    allow_failure: true
-
-phpMess:
-    script:
-        - php vendor/bin/phpmd src/ text cleancode,controversial,codesize,design,naming,unusedcode
-    allow_failure: true
+  - composer global require "squizlabs/php_codesniffer=*"
+  - composer require --dev phpunit/phpunit ^6.2
+  - composer require phpmd/phpmd @stable
+  - echo "Running PHP Unit test"
+  - php vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --colors=never
+  - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+  - php vendor/bin/phpcs --standard=phpcs.xml -w --colors src/
+  - php vendor/bin/phpmd src/ text cleancode,controversial,codesize,design,naming,unusedcode
