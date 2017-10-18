@@ -76,7 +76,6 @@ class PluginToolsTest extends WP_UnitTestCase {
     $this->assertNotEmpty($plugin_details, 'Current plugin is not active?');
 
     // This should fail
-    $plugin_details = null;
     $plugin_details = PluginTools::getPluginByTitle(strtolower($installed_plugin), true);
     $this->assertEmpty($plugin_details, 'Current plugin is not active?');
   }
