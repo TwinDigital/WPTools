@@ -36,4 +36,4 @@ script:
 after_success:
   - travis_retry php vendor/bin/coveralls --verbose --exclude-no-stmt
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
