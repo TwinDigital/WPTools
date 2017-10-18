@@ -70,7 +70,7 @@ class PluginTools {
   public static function getPluginByTitle(string $title, bool $case_sensitive = true) {
     self::loadPluginList();
     foreach (self::$loadedPlugins as $k => $v) {
-      if ($case_sensitive === true) {
+      if ($case_sensitive === false) {
         $v['Name'] = strtolower($v['Name']);
         $title = strtolower($title);
       }
