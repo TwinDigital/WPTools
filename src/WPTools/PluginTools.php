@@ -25,7 +25,7 @@ class PluginTools {
    * @return void
    */
   public static function loadPluginList(): void {
-    if (empty(self::$loadedPlugins) === true) {
+    if (empty(self::$loadedPlugins) === true || count(self::$loadedPlugins) === 0) {
       include_once \ABSPATH . '/wp-admin/includes/plugin.php';
       $allPlugins = get_plugins();
       $activePlugins = (array)get_option('active_plugins', []);
