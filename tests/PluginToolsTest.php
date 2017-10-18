@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use TwinDigital\WPTools\PluginTools;
 
-class PluginToolsTest extends TestCase {
+class PluginToolsTest extends WP_UnitTestCase {
 
   /**
    * Tests if the plugin_list is loaded.
@@ -45,16 +45,11 @@ class PluginToolsTest extends TestCase {
    * @return void
    */
   public function testGetPluginByTitle() {
-    add_action(
-      'plugins_loaded',
-      function () {
-        PluginTools::refreshLoadedPlugins();
-        echo 'Plugin-list:' . PHP_EOL;
-        print_r(PluginTools::$loadedPlugins);
-        echo 'End of lugin-list:' . PHP_EOL;
-        $this->assertEmpty(PluginTools::getPluginByTitle('Non-existing-plugin', 'Found a plugin that is non-existing? Oops'));
-        $this->assertNotEmpty(PluginTools::getPluginByTitle('WPTools', 'Current plugin is not active?'));
-      }
-    );
+    PluginTools::refreshLoadedPlugins();
+    echo 'Plugin-list:' . PHP_EOL;
+    print_r(PluginTools::$loadedPlugins);
+    echo 'End of lugin-list:' . PHP_EOL;
+    $this->assertEmpty(PluginTools::getPluginByTitle('Non-existing-plugin'), 'Found a plugin that is non-existing? Oops');
+    $this->assertNotEmpty(PluginTools::getPluginByTitle('WPTools'), 'Current plugin is not active?');
   }
 }

@@ -29,7 +29,7 @@ tests_add_filter(
   'muplugins_loaded',
   function () {
     // Manually load plugin
-    include PLUGIN_PATH;
+    include_once PLUGIN_PATH;
   }
 );
 

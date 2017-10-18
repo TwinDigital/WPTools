@@ -7,7 +7,7 @@
   convertWarningsToExceptions="true"
 >
   <php>
-    <env name="PLUGIN_FILE" value="WPTools.php"/>
+    <env name="PLUGIN_FILE" value="wptools.php"/>
   </php>
   <testsuites>
     <testsuite>
