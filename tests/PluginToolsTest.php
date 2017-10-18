@@ -2,7 +2,20 @@
 
 use TwinDigital\WPTools\PluginTools;
 
+/**
+ * Class PluginToolsTest
+ */
 class PluginToolsTest extends WP_UnitTestCase {
+
+  /**
+   * Plugins that come pre-installed with WordPress.
+   *
+   * @var array $preinstalledPlugins
+   */
+  public $preinstalledPlugins = [
+    'Akismet Anti-Spam',
+    'Hello Dolly',
+  ];
 
   /**
    * Tests if the plugin_list is loaded.
@@ -17,22 +30,11 @@ class PluginToolsTest extends WP_UnitTestCase {
   /**
    * Tests if the plugin_list is loaded.
    *
-   * @covers \TwinDigital\WPTools\PluginTools::loadPluginList()
-   * @return void
-   */
-  public function testLoadPluginListForced() {
-    PluginTools::loadPluginList(true);
-    $this->assertNotCount(0, PluginTools::$loadedPlugins, 'Pluginlist is empty, probably failed loading the list of plugins.');
-  }
-
-  /**
-   * Tests if the plugin_list is loaded.
-   *
    * @covers \TwinDigital\WPTools\PluginTools::refreshLoadedPlugins()
    * @return void
    */
   public function testRefreshLoadedPlugins() {
-    PluginTools::$loadedPlugins = null;
+    PluginTools::$loadedPlugins = [];
     PluginTools::refreshLoadedPlugins();
     $this->assertNotCount(0, PluginTools::$loadedPlugins, 'Pluginlist is empty, probably failed loading the list of plugins.');
   }
@@ -46,37 +48,34 @@ class PluginToolsTest extends WP_UnitTestCase {
   public function testGetPluginByTitle() {
     PluginTools::refreshLoadedPlugins();
     $this->assertEmpty(PluginTools::getPluginByTitle('Non-existing-plugin'), 'Found a plugin that is non-existing? Oops');
-    $list_of_plugins_to_try = [
-      'Akismet Anti-Spam',
-      'Hello Dolly',
-    ];
-    $plugin_details = null;
-    foreach ($list_of_plugins_to_try as $plugin) {
-      $plugin_details = PluginTools::getPluginByTitle($plugin);
-      if ($plugin_details !== false) {
+    $pluginDetails = null;
+    foreach ($this->preinstalledPlugins as $plugin) {
+      $pluginDetails = PluginTools::getPluginByTitle($plugin);
+      if ($pluginDetails !== false) {
         break;
       }
     }
-    $this->assertNotEmpty($plugin_details, 'Current plugin is not active?');
+    $this->assertNotEmpty($pluginDetails);
+    $this->assertNotCount(0, $pluginDetails);
+  }
 
-    // Should not fail
-    $list_of_plugins_to_try = [
-      'Akismet Anti-Spam',
-      'Hello Dolly',
-    ];
-    $plugin_details = null;
-    $installed_plugin = null;
-    foreach ($list_of_plugins_to_try as $plugin) {
-      $plugin_details = PluginTools::getPluginByTitle(strtolower($plugin), false);
-      if ($plugin_details !== false) {
-        $installed_plugin = $plugin;
+  /**
+   * Tests if getting a plugin by name is working as it should.
+   *
+   * @covers \TwinDigital\WPTools\PluginTools::getPluginByTitleCaseInsensitive()
+   * @return void
+   */
+  public function testGetPluginByTitleCaseInsensitive() {
+    PluginTools::refreshLoadedPlugins();
+    $this->assertEmpty(PluginTools::getPluginByTitleCaseInsensitive(strtolower('Non-existing-plugin')), 'Found a plugin that is non-existing? Oops');
+    $pluginDetails = null;
+    foreach ($this->preinstalledPlugins as $plugin) {
+      $pluginDetails = PluginTools::getPluginByTitleCaseInsensitive(strtolower($plugin));
+      if ($pluginDetails !== false) {
         break;
       }
     }
-    $this->assertNotEmpty($plugin_details, 'Current plugin is not active?');
-
-    // This should fail
-    $plugin_details = PluginTools::getPluginByTitle(strtolower($installed_plugin), true);
-    $this->assertEmpty($plugin_details, 'Current plugin is not active?');
+    $this->assertNotEmpty($pluginDetails);
+    $this->assertNotCount(0, $pluginDetails);
   }
 }

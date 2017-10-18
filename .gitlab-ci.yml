@@ -47,7 +47,7 @@ PHPunit:PHP7.1:MySQL:
   script:
   - composer install --no-interaction --no-progress
   - composer require "squizlabs/php_codesniffer=*"
-  - composer require --dev phpunit/phpunit ^6.2
+  - composer require phpunit/phpunit ^6.2
   - composer require phpmd/phpmd @stable
   - echo "Running PHP Unit test"
   - php vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --colors=never

@@ -21,26 +21,20 @@ class PluginTools {
   /**
    * Loads the list of plugins.
    *
-   * @param boolean $force_reload Forces reload of the loaded plugins. Also flushes cache.
-   *
    * @since 1.0.0
    * @return void
    */
-  public static function loadPluginList(bool $force_reload = false): void {
-    if ($force_reload === true) {
-      wp_cache_flush();
-      self::$loadedPlugins = [];
-    }
+  public static function loadPluginList(): void {
     if (empty(self::$loadedPlugins) === true) {
       include_once \ABSPATH . '/wp-admin/includes/plugin.php';
-      $all_plugins = get_plugins();
-      $active_plugins = (array)get_option('active_plugins', []);
-      foreach ($all_plugins as $k => $plugin) {
+      $allPlugins = get_plugins();
+      $activePlugins = (array)get_option('active_plugins', []);
+      foreach ($allPlugins as $k => $plugin) {
         self::$loadedPlugins[] = array_merge(
           $plugin,
           [
             'Path'   => $k,
-            'Active' => (bool)(in_array($k, $active_plugins)),
+            'Active' => (bool)(in_array($k, $activePlugins)),
           ]
         );
       }
@@ -55,25 +49,43 @@ class PluginTools {
    * @return void
    */
   public static function refreshLoadedPlugins(): void {
-    self::loadPluginList(true);
+    wp_cache_flush();
+    self::$loadedPlugins = [];
+    self::loadPluginList();
   }
 
   /**
    * Returns plugin by name (case-sensitive)
    *
-   * @param string  $title          Title of the plugin.
-   * @param boolean $case_sensitive Wether the title-search should be case-sensitive, true by default.
+   * @param string $title Title of the plugin.
    *
    * @since 1.0.0
    * @return array|boolean False if not found, array otherwise.
    */
-  public static function getPluginByTitle(string $title, bool $case_sensitive = true) {
+  public static function getPluginByTitle(string $title) {
     self::loadPluginList();
-    foreach (self::$loadedPlugins as $k => $v) {
-      if ($case_sensitive === false) {
-        $v['Name'] = strtolower($v['Name']);
-        $title = strtolower($title);
+    foreach (self::$loadedPlugins as $v) {
+      if ($v['Name'] === $title) {
+        return $v;
       }
+    }
+
+    return false;
+  }
+
+  /**
+   * Returns plugin by name (case-sensitive)
+   *
+   * @param string $title Title of the plugin.
+   *
+   * @since 1.0.0
+   * @return array|boolean False if not found, array otherwise.
+   */
+  public static function getPluginByTitleCaseInsensitive(string $title) {
+    self::loadPluginList();
+    foreach (self::$loadedPlugins as $v) {
+      $v['Name'] = strtolower($v['Name']);
+      $title = strtolower($title);
       if ($v['Name'] === $title) {
         return $v;
       }
