@@ -1,6 +1,8 @@
 <?php
 
-use TwinDigital\WPTools\PluginTools;
+namespace TwinDigital\WPTools;
+
+use WP_UnitTestCase;
 
 /**
  * Class PluginToolsTest
@@ -17,6 +19,10 @@ class PluginToolsTest extends WP_UnitTestCase {
     'Hello Dolly',
   ];
 
+  /**
+   * Comment
+   * @return void
+   */
   public function setUp() {
     parent::setUp();
   }
@@ -85,6 +91,10 @@ class PluginToolsTest extends WP_UnitTestCase {
     $this->assertNotCount(0, $pluginDetails);
   }
 
+  /**
+   * Test wether a plugin is active.
+   * @return void
+   */
   public function testIsPluginActive() {
     $this->assertFalse(PluginTools::isPluginActive('Non-existing-plugin'));
     $this->assertFalse(PluginTools::isPluginActive('Hello Dolly'));
