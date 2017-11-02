@@ -57,5 +57,5 @@ PHPunit:PHP7.1:MySQL:
   - echo "Running PHP Unit test"
   - php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --colors=never
   - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
-  - php vendor/bin/phpcs --standard=./phpcs.xml -w --colors src/
-  - php vendor/bin/phpmd src/ text $CI_PROJECT_DIR/phpmd.xml
+  - php vendor/bin/phpcs --standard=phpcs.xml -w --colors src/
+  - php vendor/bin/phpmd src/ text phpmd.xml
