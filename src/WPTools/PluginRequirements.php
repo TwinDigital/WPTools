@@ -4,7 +4,6 @@ namespace TwinDigital\WPTools;
 
 /**
  * Class PluginRequirements
- * @package TwinDigital\WPTools
  */
 class PluginRequirements {
 
@@ -94,7 +93,7 @@ class PluginRequirements {
       $installed = self::checkPluginInstalled($plugin['Name']);
       if ($installed === false) {
         $return = false;
-      } else {
+      } else if ($installed === true) {
         if ($plugin['Active'] === true) {
           $return = (bool)($plugin['Active'] === $installed['Active']);
         }
@@ -110,7 +109,7 @@ class PluginRequirements {
    *
    * @return boolean
    */
-  protected static function checkPluginInstalled(string $pluginName): bool {
+  public static function checkPluginInstalled(string $pluginName): bool {
     $return = false;
     if (is_array(PluginTools::getPluginByTitleCaseInsensitive($pluginName)) === true) {
       $return = true;
