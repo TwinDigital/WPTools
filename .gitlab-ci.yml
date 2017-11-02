@@ -51,9 +51,9 @@ PHPunit:PHP7.1:MySQL:
     - mysql:5.6
   script:
   - composer install --no-interaction --no-progress
-  - composer require "squizlabs/php_codesniffer=*" --no-interaction
-  - composer require phpunit/phpunit ^6.2 --no-interaction
-  - composer require phpmd/phpmd @stable --no-interaction
+  - composer require "squizlabs/php_codesniffer=*" --no-interaction --no-progress
+  - composer require phpunit/phpunit ^6.2 --no-interaction --no-progress
+  - composer require phpmd/phpmd @stable --no-interaction --no-progress
   - echo "Running PHP Unit test"
   - php -d xdebug.profiler_enable=on vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-text --colors=never
   - php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
