@@ -17,6 +17,10 @@ class PluginToolsTest extends WP_UnitTestCase {
     'Hello Dolly',
   ];
 
+  public function setUp() {
+    parent::setUp();
+  }
+
   /**
    * Tests if the plugin_list is loaded.
    *
@@ -79,5 +83,10 @@ class PluginToolsTest extends WP_UnitTestCase {
     }
     $this->assertNotEmpty($pluginDetails);
     $this->assertNotCount(0, $pluginDetails);
+  }
+
+  public function testIsPluginActive() {
+    $this->assertFalse(PluginTools::isPluginActive('Non-existing-plugin'));
+    $this->assertFalse(PluginTools::isPluginActive('Hello Dolly'));
   }
 }

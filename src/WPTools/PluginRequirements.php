@@ -89,18 +89,19 @@ class PluginRequirements {
    * @return boolean Wether all checks are successful.
    */
   public static function checkRequiredPlugins(): bool {
+    $return = true;
     foreach (self::$requiredPlugins as $plugin) {
       $installed = self::checkPluginInstalled($plugin['Name']);
       if ($installed === false) {
-        return false;
+        $return = false;
       } else {
         if ($plugin['Active'] === true) {
-          return (bool)($plugin['Active'] === $installed['Active']);
+          $return = (bool)($plugin['Active'] === $installed['Active']);
         }
       }
     }
 
-    return true;
+    return $return;
   }
 
   /**
@@ -110,28 +111,11 @@ class PluginRequirements {
    * @return boolean
    */
   protected static function checkPluginInstalled(string $pluginName): bool {
-    if (PluginTools::getPluginByTitle($pluginName) !== false) {
-      return true;
-    } else if (PluginTools::getPluginByTitleCaseInsensitive($pluginName) !== false) {
-      return true;
+    $return = false;
+    if (is_array(PluginTools::getPluginByTitleCaseInsensitive($pluginName)) === true) {
+      $return = true;
     }
 
-    return false;
-  }
-
-  /**
-   * Checks wether the plugin is activated.
-   * @param string $pluginName The name of the plugin.
-   *
-   * @return boolean
-   */
-  protected static function checkPluginIsActive(string $pluginName): bool {
-    if (PluginTools::getPluginByTitle($pluginName) !== false) {
-      return true;
-    } else if (PluginTools::getPluginByTitleCaseInsensitive($pluginName) !== false) {
-      return true;
-    }
-
-    return false;
+    return $return;
   }
 }

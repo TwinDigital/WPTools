@@ -97,13 +97,14 @@ class PluginTools {
    * @return boolean True if the plugin is active, false otherwise.
    */
   public static function isPluginActive(string $pluginName): bool {
+    $return = false;
     $plugin = self::getPluginByTitle($pluginName);
     if ($plugin === false) {
-      return false;
+      $return = false;
     } else if (is_array($plugin) === true && array_key_exists('Name', $plugin) === true) {
-      return $plugin['Active'];
-    } else {
-      return false;
+      $return = $plugin['Active'];
     }
+
+    return $return;
   }
 }

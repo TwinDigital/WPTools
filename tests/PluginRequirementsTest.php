@@ -20,6 +20,10 @@ class PluginRequirementsTest extends WP_UnitTestCase {
 
   /**
    * Test adding a plugin-requirement.
+   * @covers \TwinDigital\WPTools\PluginRequirements::checkPluginInstalled()
+   * @covers \TwinDigital\WPTools\PluginRequirements::checkRequiredPlugins()
+   * @covers \TwinDigital\WPTools\PluginRequirements::addPluginRequirement()
+   * @covers \TwinDigital\WPTools\PluginRequirements::removePluginRequirement()
    * @return void
    */
   public function testPluginRequirements() {
@@ -43,11 +47,21 @@ class PluginRequirementsTest extends WP_UnitTestCase {
       ),
       'Check for existing requirement failed'
     );
+    $this->assertTrue(
+      PluginRequirements::addPluginRequirement(
+        'WPTools',
+        '0.0.0',
+        '0.0.0',
+        true
+      ),
+      'Could not add fake requirements'
+    );
     // Testing requiredPlugins should be false, since we set fake version-numbers.
     $this->assertFalse(
       PluginRequirements::checkRequiredPlugins(),
       'Requirement should not be met unless version number of Hello Dolly is 0.0.0'
     );
+    $this->assertTrue(PluginRequirements::removePluginRequirement('WPTools'));
 
     $this->assertTrue(PluginRequirements::removePluginRequirement('Hello Dolly'));
     $this->assertFalse(PluginRequirements::removePluginRequirement('Hello Dolly'));
