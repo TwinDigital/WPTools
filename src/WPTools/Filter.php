@@ -26,10 +26,7 @@ class Filter {
     $return = false;
     foreach ($filters as $priority => $filter) {
       foreach ($filter as $function) {
-        if (is_array($function) === true
-            && is_a($function['function'][0], $class) === true
-            && $method === $function['function'][1]
-        ) {
+        if (self::isFilterFunctionClass($function, $class, $method) === true) {
           $return = remove_filter(
             $hook,
             [
@@ -43,5 +40,22 @@ class Filter {
     }
 
     return $return;
+  }
+
+  /**
+   * Checks whether a filter contains the supplied Class and Function
+   *
+   * @param array  $function The original filter from $wp_filter.
+   * @param string $class    The class in which the method should be called.
+   * @param string $method   The method to check for.
+   *
+   * @return boolean
+   */
+  private static function isFilterFunctionClass(array $function, string $class, string $method): bool {
+    if (is_array($function) === true && is_a($function['function'][0], $class) === true && $method === $function['function'][1]) {
+      return true;
+    }
+
+    return false;
   }
 }

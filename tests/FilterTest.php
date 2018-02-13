@@ -27,7 +27,7 @@ class FilterTest extends WP_UnitTestCase {
   public function testRemove() {
     $filter   = 'testfilter';
     $class    = Filter::class;
-    $function = 'nonExistentFunction';
+    $function = 'remove';
     $priority = 10;
     $this->assertFalse(Filter::remove($filter, $class, $function), 'Should not be able te remove a filter that is not added');
     add_filter($filter, $function, $priority, 0);
