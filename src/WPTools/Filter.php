@@ -9,31 +9,28 @@ class Filter {
 
   /**
    * Remove active filter from $wp_filter
+   *
    * @param string $hook   Hook on which the original filter was applied.
    * @param string $class  Classname.
    * @param string $method Method.
    *
-   * @todo Create tests.
-   *
    * @SuppressWarnings(PHPMD.Superglobals) Don't worry, I know what I'm doing.
-   * @return void
+   * @return boolean
    */
-  public static function remove(string $hook, string $class, string $method) {
-    $filters = [];
+  public static function remove(string $hook, string $class, string $method): bool {
     if (array_key_exists($hook, $GLOBALS['wp_filter']) === true) {
       $filters = $GLOBALS['wp_filter'][$hook];
+    } else {
+      return false;
     }
-    if (empty($filters) === true) {
-      return;
-    }
-
+    $return = false;
     foreach ($filters as $priority => $filter) {
       foreach ($filter as $function) {
         if (is_array($function) === true
             && is_a($function['function'][0], $class) === true
             && $method === $function['function'][1]
         ) {
-          remove_filter(
+          $return = remove_filter(
             $hook,
             [
               $function['function'][0],
@@ -44,5 +41,7 @@ class Filter {
         }
       }
     }
+
+    return $return;
   }
 }
