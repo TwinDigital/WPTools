@@ -17,7 +17,7 @@
 use TwinDigital\WPTools\PluginTools;
 
 if (defined('ABSPATH') === false) {
-  exit;
+    exit;
 }
 require __DIR__ . '/vendor/autoload.php';
 add_action('plugins_loaded', PluginTools::loadPluginList());

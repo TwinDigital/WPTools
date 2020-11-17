@@ -20,7 +20,8 @@
   "require": {
   },
   "require-dev": {
-    "phpmd/phpmd": "@stable"
+    "phpmd/phpmd": "@stable",
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
     "psr-4": {
