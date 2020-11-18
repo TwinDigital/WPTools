@@ -28,8 +28,8 @@ if (!@include PLUGIN_FOLDER . '/vendor/autoload.php') {
 
 $GLOBALS['wp_tests_options'] = [
     'active_plugins' => [PLUGIN_PATH],
-    'template'       => 'twentysixteen',
-    'stylesheet'     => 'twentysixteen',
+    'template'       => 'twentynineteen',
+    'stylesheet'     => 'twentynineteen',
 ];
 
 tests_add_filter('shutdown', 'drop_tables', 999999);
