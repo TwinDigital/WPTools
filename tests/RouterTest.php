@@ -28,8 +28,18 @@ class RouterTest extends WP_UnitTestCase
             function () {
                 return
                     [
-                        'testroute' =>
-                            (new Route('testhookurl', 'testhook', 'page')),
+                        'testroute'          =>
+                            (new Route(
+                                'testhookurl',
+                                'testhook',
+                                'page'
+                            )),
+                        'testroute_fullpath' =>
+                            (new Route(
+                                'testhookurl_fullpath',
+                                'testhook',
+                                __DIR__ . '/bootstrap.php'
+                            )),
                     ];
             },
             10,
@@ -55,6 +65,8 @@ class RouterTest extends WP_UnitTestCase
         $this->assertEquals(1, did_action('init'));
         $this->assertEquals(1, did_action('testhook'));
         $this->assertStringEndsWith('page.php', $router->loadRouteTemplate('post'));
+        $this->go_to(site_url('/testhookurl_fullpath'));
+        $this->assertStringEndsWith('bootstrap.php', $router->loadRouteTemplate('post'));
 
         $this->go_to(site_url('/'));
         $router->deleteRoute('testroute');

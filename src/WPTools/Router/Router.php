@@ -101,6 +101,10 @@ class Router
             return $template;
         }
 
+        if (file_exists($this->matchedRoute->getTemplate())) {
+            return $this->matchedRoute->getTemplate();
+        }
+
         $routeTemplate = get_query_template($this->matchedRoute->getTemplate());
 
         if (!empty($routeTemplate)) {
