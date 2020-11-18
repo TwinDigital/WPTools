@@ -22,8 +22,6 @@ class FilterTest extends WP_UnitTestCase
     /**
      * Test filter removal from classes.
      *
-     * @covers \TwinDigital\WPTools\Filter::remove()
-     *
      * @return void
      */
     public function testRemove()
@@ -44,6 +42,11 @@ class FilterTest extends WP_UnitTestCase
         $this->assertTrue(
             Filter::remove($filter, $class, $function),
             'Should be able te remove a filter that is added'
+        );
+        add_filter($filter, [$class, 'test'], $priority, 0);
+        $this->assertFalse(
+            Filter::remove($filter, $class, $function),
+            'Should not be able to remove a filter of which the function doesn\'t exist'
         );
         $this->assertFalse(
             Filter::remove($filter, $class, $function),
