@@ -53,11 +53,9 @@ class PluginRequirements
         string $pluginMaxVersion,
         bool $activated = true
     ) {
-        if (is_array(self::$requiredPlugins) === true) {
-            foreach (self::$requiredPlugins as $plugin) {
-                if ($plugin['Name'] === $pluginName) {
-                    return false;
-                }
+        foreach (self::$requiredPlugins as $plugin) {
+            if ($plugin['Name'] === $pluginName) {
+                return false;
             }
         }
         self::$requiredPlugins[] = [

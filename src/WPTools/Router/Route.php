@@ -5,17 +5,26 @@ namespace TwinDigital\WPTools\Router;
 class Route
 {
 
-    protected $hook     = null;
+    /**
+     * @var string
+     */
+    protected $path;
 
-    protected $path     = null;
+    /**
+     * @var string|null
+     */
+    protected $hook;
 
-    protected $template = null;
+    /**
+     * @var string|null
+     */
+    protected $template;
 
     /**
      * Route constructor.
-     * @param string $path
-     * @param null   $hook
-     * @param null   $template
+     * @param string      $path
+     * @param string|null $hook
+     * @param string|null $template
      */
     public function __construct(string $path, $hook = null, $template = null)
     {

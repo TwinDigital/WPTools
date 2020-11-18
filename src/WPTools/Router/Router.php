@@ -10,12 +10,12 @@ class Router
 {
 
     /**
-     * @var self
+     * @var self|null
      */
     private static $instance;
 
     /**
-     * @var \TwinDigital\WPTools\Router\Route
+     * @var \TwinDigital\WPTools\Router\Route|null
      */
     private $matchedRoute = null;
 
