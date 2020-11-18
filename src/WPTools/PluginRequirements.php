@@ -24,7 +24,7 @@ class PluginRequirements
      * Internal list of the required plugins that are added by `addPluginRequirement()`
      * @var array $requiredPlugins
      */
-    protected static $requiredPlugins;
+    protected static $requiredPlugins = [];
 
     /**
      * The minimum required WordPress-version.
