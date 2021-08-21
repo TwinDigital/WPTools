@@ -20,4 +20,5 @@ if (defined('ABSPATH') === false) {
     exit;
 }
 require __DIR__ . '/vendor/autoload.php';
-add_action('plugins_loaded', PluginTools::loadPluginList());
+add_action('plugins_loaded', [PluginTools::class, 'loadPluginList']);
+
